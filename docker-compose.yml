@@ -1,0 +1,26 @@
+services:
+  app:
+    build: .
+    container_name: hakari-app
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: hakari-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: hakari
+      POSTGRES_PASSWORD: hakari
+      POSTGRES_DB: hakari_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
