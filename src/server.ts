@@ -6,8 +6,9 @@ const app = express()
 const PORT = process.env.PORT
 
 app.get(`/`, (req: Request, res: Response) => {
-    return res.status(200).json(`
-        Server Started`)
+    return res.status(200).json({
+        "message": `Server Started`
+    })
 })
 
 app.listen(PORT, () => {
