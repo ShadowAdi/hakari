@@ -1,8 +1,8 @@
 import express, { Request, Response } from "express";
-import { initDB } from "./db/db.js";
+import { connectDB } from "./db/db.js";
 
 const app = express()
-initDB()
+connectDB()
 
 
 const PORT = process.env.PORT

@@ -1,9 +1,11 @@
-import { Pool } from "pg";
+import { neon, NeonQueryFunction } from "@neondatabase/serverless"
+import { drizzle } from "drizzle-orm/neon-http"
 
 const ConnectionString = process.env.ConnectionString
-export let pool: Pool
-export const initDB = () => {
-    pool = new Pool({
-        connectionString: ConnectionString
-    })
+let sql: NeonQueryFunction<false, false>
+let db: ReturnType<typeof drizzle>
+
+export const connectDB = async () => {
+    sql = neon(ConnectionString!)
+    db=drizzle(sql)
 }
