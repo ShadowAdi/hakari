@@ -1,12 +1,28 @@
 import express, { Request, Response } from "express";
 import { AppConnect } from "./config/AppConfig.js";
-const app = express()
+import { setupRoutes } from "./routes/index.js";
 
+const app = express();
 
-app.get(`/`, (req: Request, res: Response) => {
-    return res.status(200).json({
-        "message": `Server Started`
-    })
-})
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-AppConnect(app)
+// Root endpoint
+app.get("/", (req: Request, res: Response) => {
+  return res.status(200).json({
+    message: "Server Started",
+    success: true,
+    timestamp: new Date().toISOString(),
+    endpoints: {
+      health: "/health",
+      api: "/api/health",
+    },
+  });
+});
+
+// Setup all routes
+setupRoutes(app);
+
+// Start server
+AppConnect(app);
