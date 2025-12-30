@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
-import "./db/db.js";
 import { PORT } from "./config/DotenvConfig.js";
+import { AppConnect } from "./config/AppConfig.js";
 const app = express()
 
 
@@ -10,6 +10,4 @@ app.get(`/`, (req: Request, res: Response) => {
     })
 })
 
-app.listen(PORT, () => {
-    console.log(`Server started at PORT ${PORT}`)
-})
+AppConnect(app)
