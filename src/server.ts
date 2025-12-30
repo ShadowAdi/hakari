@@ -1,9 +1,8 @@
 import express, { Request, Response } from "express";
 import "./db/db.js";
+import { PORT } from "./config/DotenvConfig.js";
 const app = express()
 
-
-const PORT = process.env.PORT
 
 app.get(`/`, (req: Request, res: Response) => {
     return res.status(200).json({
