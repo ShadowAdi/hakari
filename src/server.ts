@@ -6,7 +6,7 @@ const app = express()
 
 app.get(`/`, (req: Request, res: Response) => {
     return res.status(200).json({
-        "message": `Server Started`
+        "message": `Server Started at Port ${PORT}`
     })
 })
 
