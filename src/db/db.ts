@@ -1,11 +1,13 @@
-import { neon, NeonQueryFunction } from "@neondatabase/serverless"
-import { drizzle } from "drizzle-orm/neon-http"
+import { drizzle } from "drizzle-orm/node-postgres";
+import pg from "pg";
 
-const ConnectionString = process.env.ConnectionString
-let sql: NeonQueryFunction<false, false>
-let db: ReturnType<typeof drizzle>
+const { Pool } = pg;
 
-export const connectDB = async () => {
-    sql = neon(ConnectionString!)
-    db=drizzle(sql)
-}
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl:{
+    rejectUnauthorized:false
+  }
+});
+
+export const db = drizzle(pool);

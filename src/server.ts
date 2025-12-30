@@ -1,8 +1,6 @@
 import express, { Request, Response } from "express";
-import { connectDB } from "./db/db.js";
-
+import "./db/db.js";
 const app = express()
-connectDB()
 
 
 const PORT = process.env.PORT
